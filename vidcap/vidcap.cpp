@@ -12,7 +12,7 @@ using namespace cv;
 using namespace std;
 
 int main(int argc, char* argv[]) {
-    VideoCapture cap("./subject1_rgb/M_person_1_backgroud_1_illumination_1_pose_1_actionType_1.avi"); // open the video file for reading
+    VideoCapture cap("./datasets/sheffield_subject1_rgb/M_person_1_backgroud_1_illumination_1_pose_1_actionType_1.avi"); // open the video file for reading
 
     // if not success, exit program
     if (!cap.isOpened()) {

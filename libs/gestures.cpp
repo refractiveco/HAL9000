@@ -13,7 +13,7 @@ using namespace std;
 Gestures::Gestures(void) {
    // Constructor
    cout << "Initialising gesture recognition library..." << endl;
-
+   
 }
 
 string Gestures::findGestures(Mat frame) {
@@ -48,6 +48,8 @@ string Gestures::cnnRecognition(Mat frame) {
   /*
    * TODO: This is where the magic happens
    */
+
+  //
 
   return gestureResult;
 }

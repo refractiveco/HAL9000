@@ -8,48 +8,54 @@
 #include "opencv2/highgui/highgui.hpp"
 #include <iostream>
 
+// Include framework libraries
+#include <gestures.h>
+
 using namespace cv;
 using namespace std;
 
-int main(int argc, char* argv[]) {
-    VideoCapture cap("./datasets/sheffield_subject1_rgb/M_person_1_backgroud_1_illumination_1_pose_1_actionType_1.avi"); // open the video file for reading
+int main() {
+  // Gestures object
+  Gestures gesture;
 
-    // if not success, exit program
-    if (!cap.isOpened()) {
-         cout << "Cannot open the video file" << endl;
-         return -1;
-    }
+  // Dataset from http://www.iis.ee.ic.ac.uk/icvl/ges_db.htm
+  VideoCapture cap("../datasets/sheffield_subject1_rgb/M_person_1_backgroud_1_illumination_1_pose_1_actionType_1.avi"); // open the video file for reading
 
-    double fps = cap.get(CV_CAP_PROP_FPS); //get the frames per seconds of the video
+  // if not success, exit program
+  if (!cap.isOpened()) {
+       cout << "Cannot open the video file" << endl;
+       return -1;
+  }
 
-    cout << "Frame per seconds : " << fps << endl;
+  double fps = cap.get(CV_CAP_PROP_FPS); //get the frames per seconds of the video
 
-    namedWindow("MyVideo",CV_WINDOW_AUTOSIZE); //create a window called "MyVideo"
+  cout << "Frame per seconds : " << fps << endl;
 
-    while(1) {
-        Mat frame;
+  namedWindow("MyVideo",CV_WINDOW_AUTOSIZE); //create a window called "MyVideo"
 
-        bool bSuccess = cap.read(frame); // read a new frame from video
+  while(1) {
+      Mat frame;
 
-        // if not success, break loop
-        if (!bSuccess) {
-          cout << "Cannot read the frame from video file" << endl;
-          break;
-        }
+      bool bSuccess = cap.read(frame); // read a new frame from video
 
-        imshow("MyVideo", frame); //show the frame in "MyVideo" window
+      // if not success, break loop
+      if (!bSuccess) {
+        cout << "Cannot read the frame from video file" << endl;
+        break;
+      }
 
-        // Gesture recognition
-        string foundGesture = gesture.findGestures(cameraFrame);
-        cout << ">>> Gesture found: "+foundGesture << endl;
+      imshow("MyVideo", frame); //show the frame in "MyVideo" window
 
-        //wait for 'esc' key press for 30 ms. If 'esc' key is pressed, break loop
-        if(waitKey(30) == 27) {
-                cout << "esc key is pressed by user" << endl;
-                break;
-       }
-    }
+      // Gesture recognition
+      string foundGesture = gesture.findGestures(frame);
+      cout << ">>> Gesture found: "+foundGesture << endl;
 
-    return 0;
+      //wait for 'esc' key press for 30 ms. If 'esc' key is pressed, break loop
+      if(waitKey(30) == 27) {
+              cout << "esc key is pressed by user" << endl;
+              break;
+     }
+  }
 
+  return 0;
 }

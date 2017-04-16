@@ -12,7 +12,7 @@
 using namespace std;
 using namespace cv;
 
-// Define a class
+// Gesture recognition class
 class Gestures {
   public:
     string findGestures(Mat frame);

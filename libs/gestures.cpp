@@ -1,6 +1,6 @@
 /**
  *
- *  Gesture recognition library
+ *  Continuous gesture and body language recognition library
  *  @author rob.dunne@manchester.ac.uk
  *
  */
@@ -13,12 +13,12 @@ using namespace std;
 Gestures::Gestures(void) {
    // Constructor
    cout << "Initialising gesture recognition library..." << endl;
-   
+
 }
 
 string Gestures::findGestures(Mat frame) {
-  // Try to find gestures or body language
-  string gestureResult = cnnRecognition(frame);
+  // Find gestures or body language from the stream of video frames
+  string gestureResult = hmmRecognition(frame);
 
   // Try CNN first
   if(gestureResult != "none") {
@@ -39,17 +39,22 @@ string Gestures::findGestures(Mat frame) {
   }
 }
 
-string Gestures::cnnRecognition(Mat frame) {
-  // Process the frame(s) using a CNN for gesture recognition
-  cout << "Processing frame using CNN..." << endl;
+string Gestures::hmmRecognition(Mat frame) {
+  // Process the frame(s) using a HMM for continuous gesture recognition
+  cout << "Processing frame using HMM..." << endl;
 
   string gestureResult = "none";
 
-  /*
-   * TODO: This is where the magic happens
-   */
+  // Feature extraction: Greyscale, threshold, background subtraction (separate method?).
+  Mat processedFrame =
 
-  //
+  // Classify the gesture with Haar (previously trained classifiers - XML files for each gesture).
+
+  // Check against HMM sequence classification.
+
+  // If not found add the gesture to the current HMM sequence.
+
+  // End sequence if gesture classified. (Needs a time out)
 
   return gestureResult;
 }

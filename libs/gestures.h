@@ -1,6 +1,6 @@
 /**
  *
- *  Gesture recognition library
+ *  Continuous gesture and body language recognition library
  *  @author rob.dunne@manchester.ac.uk
  *
  */

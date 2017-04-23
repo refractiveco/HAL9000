@@ -8,6 +8,12 @@ Development OS is Arch Linux.
 
 Run ./dependencies_setup.sh to install on a new system.
 
+### Libraries
+
+- Continous gesture and body language recognition (in dev).
+- Passive behaviour recognition (not started).
+- System self-extension (not started).
+
 ### Build
 
 ```make```
@@ -16,6 +22,8 @@ Run ./dependencies_setup.sh to install on a new system.
 
 ```g++ livecap.cpp ../libs/gestures.cpp -o livecap -lopencv_core -lopencv_imgproc -lopencv_videoio -lopencv_highgui -I ../libs -Wall -Wextra```
 
-### Libraries
+### Run
 
-- Continous gesture and body language recognition.
+```cd ./build```
+
+```./livecap```

@@ -49,7 +49,7 @@ Mat Gestures::hmmRecognition(Mat frame) {
   CascadeClassifier hand_cascade;
 
   if(!hand_cascade.load(hand_cascade_file)) {
-    cout << "--(!)Error loading cascade file\n";
+    cout << "------(!)Error loading cascade file\n";
   };
 
   // Feature extraction: Greyscale, threshold, background subtraction (separate method?).
@@ -59,14 +59,19 @@ Mat Gestures::hmmRecognition(Mat frame) {
   cvtColor(frame, frame_gray, CV_BGR2GRAY);
   equalizeHist(frame_gray, frame_gray);
 
-  //-- Detect gestures
+  // Classify the gesture with Haar (previously trained classifiers - XML files for each gesture).
   hand_cascade.detectMultiScale(frame_gray, hands, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, Size(30, 30));
+
+  // Draw a circle around the gesture
   for(size_t i = 0; i < hands.size(); i++) {
     Point center(hands[i].x + hands[i].width*0.5, hands[i].y + hands[i].height*0.5 );
     ellipse(frame, center, Size(hands[i].width*0.5, hands[i].height*0.5), 0, 0, 360, Scalar( 255, 0, 255 ), 4, 8, 0);
   }
 
-  // Classify the gesture with Haar (previously trained classifiers - XML files for each gesture).
+  // Return the gesture found
+  if(hands.size() > 0) {
+    cout << "Found a fist..." << endl;
+  }
 
   // Check against HMM sequence classification.
 

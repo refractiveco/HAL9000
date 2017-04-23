@@ -30,13 +30,21 @@ int main() {
   // Loop over the frames
   while(true) {
     Mat cameraFrame;
+    Mat processedFrame;
     stream1.read(cameraFrame);
     //imshow("cam", cameraFrame);
 
     //string foundGesture = gesture.findGestures(cameraFrame);
     //cout << ">>> Gesture found: "+foundGesture << endl;
 
-    imshow("camera", gesture.findGestures(cameraFrame));
+    processedFrame = gesture.findGestures(cameraFrame);
+
+    // Save a screenshot on spacebar press
+    if(waitKey(30) == 32) {
+        imwrite("../screenshots/HAL9000.jpg", processedFrame);
+    }
+
+    imshow("camera", processedFrame);
 
     waitKey(30);
   }

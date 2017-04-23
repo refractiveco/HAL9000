@@ -5,6 +5,7 @@
  *
  */
 
+#include <opencv2/objdetect/objdetect.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <iostream>
@@ -15,8 +16,8 @@ using namespace cv;
 // Gesture recognition class
 class Gestures {
   public:
-    string findGestures(Mat frame);
-    string cnnRecognition(Mat frame);
+    Mat findGestures(Mat frame);
+    Mat hmmRecognition(Mat frame);
     string occludedRecognition(Mat frame);
     string angledRecognition(Mat frame);
     Gestures();

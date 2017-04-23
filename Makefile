@@ -1,7 +1,7 @@
 # BUILD THE FRAMEWORK
 # compiler flags:
 CFLAGS  = -Wall -Wextra
-INCLUDES = -lopencv_core -lopencv_imgproc -lopencv_videoio -lopencv_highgui
+INCLUDES = -lopencv_core -lopencv_imgproc -lopencv_videoio -lopencv_highgui -lopencv_objdetect
 LIBS = ./libs/gestures.cpp -I ./libs
 
 # Build all

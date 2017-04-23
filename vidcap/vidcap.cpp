@@ -47,8 +47,8 @@ int main() {
       imshow("MyVideo", frame); //show the frame in "MyVideo" window
 
       // Gesture recognition
-      string foundGesture = gesture.findGestures(frame);
-      cout << ">>> Gesture found: "+foundGesture << endl;
+      //string foundGesture = gesture.findGestures(frame);
+      //cout << ">>> Gesture found: "+foundGesture << endl;
 
       //wait for 'esc' key press for 30 ms. If 'esc' key is pressed, break loop
       if(waitKey(30) == 27) {

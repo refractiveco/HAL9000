@@ -6,7 +6,6 @@
  */
 
 #include "gestures.h"
-#include <iostream>
 
 using namespace std;
 
@@ -16,10 +15,11 @@ Gestures::Gestures(void) {
 
 }
 
-string Gestures::findGestures(Mat frame) {
+Mat Gestures::findGestures(Mat frame) {
   // Find gestures or body language from the stream of video frames
-  string gestureResult = hmmRecognition(frame);
-
+  Mat gestureResult = hmmRecognition(frame);
+  return gestureResult;
+  /*
   // Try CNN first
   if(gestureResult != "none") {
     return gestureResult;
@@ -37,16 +37,34 @@ string Gestures::findGestures(Mat frame) {
 
     }
   }
+  */
 }
 
-string Gestures::hmmRecognition(Mat frame) {
+Mat Gestures::hmmRecognition(Mat frame) {
   // Process the frame(s) using a HMM for continuous gesture recognition
   cout << "Processing frame using HMM..." << endl;
 
   string gestureResult = "none";
+  String hand_cascade_file = "../haars/hand.xml";
+  CascadeClassifier hand_cascade;
+
+  if(!hand_cascade.load(hand_cascade_file)) {
+    cout << "--(!)Error loading cascade file\n";
+  };
 
   // Feature extraction: Greyscale, threshold, background subtraction (separate method?).
-  Mat processedFrame =
+  std::vector<Rect> hands;
+  Mat frame_gray;
+
+  cvtColor(frame, frame_gray, CV_BGR2GRAY);
+  equalizeHist(frame_gray, frame_gray);
+
+  //-- Detect gestures
+  hand_cascade.detectMultiScale(frame_gray, hands, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, Size(30, 30));
+  for(size_t i = 0; i < hands.size(); i++) {
+    Point center(hands[i].x + hands[i].width*0.5, hands[i].y + hands[i].height*0.5 );
+    ellipse(frame, center, Size(hands[i].width*0.5, hands[i].height*0.5), 0, 0, 360, Scalar( 255, 0, 255 ), 4, 8, 0);
+  }
 
   // Classify the gesture with Haar (previously trained classifiers - XML files for each gesture).
 
@@ -56,7 +74,7 @@ string Gestures::hmmRecognition(Mat frame) {
 
   // End sequence if gesture classified. (Needs a time out)
 
-  return gestureResult;
+  return frame;
 }
 
 string Gestures::occludedRecognition(Mat frame) {

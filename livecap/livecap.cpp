@@ -31,10 +31,12 @@ int main() {
   while(true) {
     Mat cameraFrame;
     stream1.read(cameraFrame);
-    imshow("cam", cameraFrame);
+    //imshow("cam", cameraFrame);
 
-    string foundGesture = gesture.findGestures(cameraFrame);
-    cout << ">>> Gesture found: "+foundGesture << endl;
+    //string foundGesture = gesture.findGestures(cameraFrame);
+    //cout << ">>> Gesture found: "+foundGesture << endl;
+
+    imshow("camera", gesture.findGestures(cameraFrame));
 
     waitKey(30);
   }

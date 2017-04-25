@@ -43,8 +43,21 @@ Mat Gestures::findGestures(Mat frame) {
 Mat Gestures::hmmRecognition(Mat frame) {
   // Process the frame(s) using a HMM for continuous gesture recognition
   cout << "Processing frame using HMM..." << endl;
+  rectangle(frame, Point(0, 0), Point(240, 35), Scalar(0, 0, 0), CV_FILLED);
 
   string gestureResult = "none";
+  vector<double> weights;
+  vector<int> levels;
+
+  // Var for list of rectangles when gesture detected
+  vector<Rect> hands;
+
+  // Feature extraction: Greyscale, threshold, background subtraction (separate method?).
+  Mat frame_gray;
+  cvtColor(frame, frame_gray, CV_BGR2GRAY);
+  equalizeHist(frame_gray, frame_gray);
+
+  // Load the classifiers
   String hand_cascade_file = "../haars/hand.xml";
   CascadeClassifier hand_cascade;
 
@@ -52,15 +65,8 @@ Mat Gestures::hmmRecognition(Mat frame) {
     cout << "------(!)Error loading cascade file\n";
   };
 
-  // Feature extraction: Greyscale, threshold, background subtraction (separate method?).
-  std::vector<Rect> hands;
-  Mat frame_gray;
-
-  cvtColor(frame, frame_gray, CV_BGR2GRAY);
-  equalizeHist(frame_gray, frame_gray);
-
   // Classify the gesture with Haar (previously trained classifiers - XML files for each gesture).
-  hand_cascade.detectMultiScale(frame_gray, hands, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, Size(30, 30));
+  hand_cascade.detectMultiScale(frame_gray, hands, levels, weights, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, Size(100, 100), Size(), true);
 
   // Draw a circle around the gesture
   for(size_t i = 0; i < hands.size(); i++) {
@@ -68,16 +74,20 @@ Mat Gestures::hmmRecognition(Mat frame) {
     ellipse(frame, center, Size(hands[i].width*0.5, hands[i].height*0.5), 0, 0, 360, Scalar( 255, 0, 255 ), 4, 8, 0);
   }
 
-  // Return the gesture found
+  // Found a gesture
   if(hands.size() > 0) {
-    cout << "Found a fist..." << endl;
+    gestureResult = "fist";
+    String frameText = gestureResult+":"+to_string(weights[0]);
+    cout << "Found a "+gestureResult+"..." << endl;
+
+    putText(frame, frameText, Point(10,15), FONT_HERSHEY_COMPLEX_SMALL, 1.0, Scalar(255, 255, 255), 1, CV_AA);
   }
 
   // Check against HMM sequence classification.
 
   // If not found add the gesture to the current HMM sequence.
 
-  // End sequence if gesture classified. (Needs a time out)
+  // End sequence if gesture classified. Execute an action based on the gesture.
 
   return frame;
 }

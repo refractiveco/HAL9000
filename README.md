@@ -11,13 +11,13 @@ Development OS is Arch Linux. Language is C++.
 
 Run ./dependencies_setup.sh to install on a new system.
 
-### Libraries / Roadmap
+### Development Libraries / Roadmap
 
 - Gesture and body language recognition (in dev).
 - Voice commands (not started).
 - Passive behaviour recognition (not started).
 - System self-extension (not started).
-- Device (not started).
+- Connecting devices (not started).
 
 ### Build
 

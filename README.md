@@ -3,7 +3,7 @@
 ### Status
 [![Build Status](https://travis-ci.org/refractiveco/HAL9000.svg?branch=master)](https://travis-ci.org/refractiveco/HAL9000)
 
-Development OS is Arch Linux.
+Development OS is Arch Linux. Language is C++.
 
 ### Dependencies
 
@@ -37,4 +37,4 @@ Build using the makefile.
 
 ### Licence
 
-This project is open source to help build the adoption and community for ambient intelligence. As such all derivatives, improvements, and modifications should be released back to the community so we can keep building. Full licence: [GNU Lesser General Public License v3.0](LICENSE)
+This project is open source to help build the adoption and community for ambient intelligence. As such all derivatives, improvements, and modifications should be released back to the community so we can keep building. No liability or warranty for use of this software. Full licence: [GNU Lesser General Public License v3.0](LICENSE)

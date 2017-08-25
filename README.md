@@ -1,7 +1,6 @@
-# HAL9000
+[![Build Status](https://travis-ci.org/refractiveco/HAL9000.svg?branch=master)](https://travis-ci.org/refractiveco/HAL9000) [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/codeclimate/codeclimate)
 
-### Status
-[![Build Status](https://travis-ci.org/refractiveco/HAL9000.svg?branch=master)](https://travis-ci.org/refractiveco/HAL9000)
+# HAL9000
 
 Development OS is Arch Linux. Language is C++.
 
